@@ -18,10 +18,13 @@ class CColors:
 def insert_linebreaks(original):
     """Inserts linebreaks into a string every 80 characters without breaking words."""
     result = ""
-    for i, word in enumerate(original.split()):
-        if i % 8 == 0:
+    cur_len = 0
+    for word in original.split():
+        if cur_len + len(word) > 80:
             result += "\n"
+            cur_len = 0
         result += word + " "
+        cur_len += len(word) + 1
     return result
 
 
@@ -37,18 +40,18 @@ if __name__ == '__main__':
     while True:
         newClip = pyperclip.paste()
         if newClip[0:5] != initialClip[0:5]:
-            print(f"{CColors.OKCYAN}=============================================={CColors.ENDC}")
-            print(CColors.OKCYAN + "==              New Clip Detected           ==" + CColors.ENDC)
-            print(f"{CColors.OKCYAN}=============================================={CColors.ENDC}\n {CColors.WARNING} {newClip} {CColors.ENDC} \n")
+            print(f"{CColors.OKCYAN}==========================================================================={CColors.ENDC}")
+            print(CColors.OKCYAN + "==                              New Clip Detected                        ==" + CColors.ENDC)
+            print(f"{CColors.OKCYAN}==========================================================================={CColors.ENDC}\n {CColors.WARNING} {newClip} {CColors.ENDC} \n")
             alreadyProcessed = False
         if len(newClip) > 85 and not alreadyProcessed:
             initialClip = insert_linebreaks(newClip)
             pyperclip.copy(initialClip)
             alreadyProcessed = True
 
-            print(f"{CColors.OKGREEN}=============================================={CColors.ENDC}")
-            print(f"{CColors.OKGREEN}==             Clip Processed               =={CColors.ENDC}")
-            print(f"{CColors.OKGREEN}=============================================={CColors.ENDC}\n {initialClip}\n")
+            print(f"{CColors.OKGREEN}==========================================================================={CColors.ENDC}")
+            print(f"{CColors.OKGREEN}==                             Clip Processed                            =={CColors.ENDC}")
+            print(f"{CColors.OKGREEN}==========================================================================={CColors.ENDC}\n {initialClip}\n")
 
 
 
