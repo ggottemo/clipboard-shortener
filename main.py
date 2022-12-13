@@ -1,4 +1,5 @@
 from time import sleep
+import os
 import pyperclip
 
 
@@ -30,11 +31,14 @@ if __name__ == '__main__':
     newClip = ""
     alreadyProcessed = False
 
+    # enable color
+    os.system('color')
+
     while True:
         newClip = pyperclip.paste()
         if newClip[0:5] != initialClip[0:5]:
             print(f"{CColors.OKCYAN}=============================================={CColors.ENDC}")
-            print(CColors.OKCYAN + "==              New Clip Detected            ==" + CColors.ENDC)
+            print(CColors.OKCYAN + "==              New Clip Detected           ==" + CColors.ENDC)
             print(f"{CColors.OKCYAN}=============================================={CColors.ENDC}\n {CColors.WARNING} {newClip} {CColors.ENDC} \n")
             alreadyProcessed = False
         if len(newClip) > 85 and not alreadyProcessed:
